@@ -1,39 +1,58 @@
-/* ====== Geral ====== */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #111;
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     min-height: 100vh;
     text-align: center;
 }
 
-/* ====== Cabeçalho ====== */
 h1 {
     color: #0f0;
     font-size: 3em;
     margin-top: 1em;
-    margin-bottom: 0.2em;
     text-shadow: 0 0 10px #0f0;
 }
 
 p {
-    font-size: 1.2em;
-    margin-bottom: 2em;
     color: #ccc;
+    font-size: 1.1em;
 }
 
-/* ====== Botões ====== */
+.section {
+    width: 90%;
+    max-width: 600px;
+    background-color: #222;
+    margin: 1em 0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+}
+
+input {
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    margin-left: 10px;
+}
+
 button {
+    margin-top: 10px;
     background-color: #0f0;
     color: #111;
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2em;
+    padding: 12px 25px;
+    font-size: 1.1em;
     border-radius: 12px;
     cursor: pointer;
     transition: 0.3s;
@@ -45,50 +64,34 @@ button:hover {
     box-shadow: 0 0 20px #0f0;
 }
 
-/* ====== Seções de treino ====== */
-.section {
-    width: 90%;
-    max-width: 600px;
-    background-color: #222;
-    margin: 1em 0;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-}
-
-.section h2 {
-    color: #0f0;
-    margin-bottom: 0.5em;
-}
-
 .exercise {
-    margin: 10px 0;
+    margin: 8px 0;
     padding: 10px;
     background-color: #333;
     border-radius: 10px;
+    cursor: pointer;
     transition: 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.exercise:hover {
-    background-color: #444;
+.exercise.done {
+    background-color: #0c0;
+    text-decoration: line-through;
 }
 
-/* ====== Footer ====== */
+.counter {
+    background-color: #0f0;
+    color: #111;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
 footer {
     margin-top: auto;
     padding: 10px;
     font-size: 0.9em;
     color: #666;
-}
-
-/* ====== Animações simples ====== */
-.fade-in {
-    animation: fadeIn 1.5s ease-in forwards;
-    opacity: 0;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
 }

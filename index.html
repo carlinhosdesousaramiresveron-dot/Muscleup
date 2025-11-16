@@ -6,136 +6,28 @@
   <title>MuscleUp</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="./manifest.json">
-  <style>
-    /* ====== Geral ====== */
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background-color: #111;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: 100vh;
-        text-align: center;
-    }
-
-    /* ====== Cabeçalho ====== */
-    h1 {
-        color: #0f0;
-        font-size: 3em;
-        margin-top: 1em;
-        margin-bottom: 0.2em;
-        text-shadow: 0 0 10px #0f0;
-    }
-
-    p {
-        font-size: 1.2em;
-        margin-bottom: 2em;
-        color: #ccc;
-    }
-
-    /* ====== Botões ====== */
-    button {
-        background-color: #0f0;
-        color: #111;
-        border: none;
-        padding: 15px 30px;
-        font-size: 1.2em;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: 0.3s;
-        box-shadow: 0 0 10px #0f0;
-        margin-bottom: 20px;
-    }
-
-    button:hover {
-        background-color: #0c0;
-        box-shadow: 0 0 20px #0f0;
-    }
-
-    /* ====== Seções de treino ====== */
-    .section {
-        width: 90%;
-        max-width: 600px;
-        background-color: #222;
-        margin: 1em 0;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
-        text-align: left;
-    }
-
-    .section h2 {
-        color: #0f0;
-        margin-bottom: 0.5em;
-    }
-
-    .exercise {
-        margin: 10px 0;
-        padding: 10px;
-        background-color: #333;
-        border-radius: 10px;
-        transition: 0.3s;
-    }
-
-    .exercise:hover {
-        background-color: #444;
-    }
-
-    /* ====== Footer ====== */
-    footer {
-        margin-top: auto;
-        padding: 10px;
-        font-size: 0.9em;
-        color: #666;
-    }
-
-    /* ====== Animações simples ====== */
-    .fade-in {
-        animation: fadeIn 1.5s ease-in forwards;
-        opacity: 0;
-    }
-
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
-        }
-    }
-  </style>
 </head>
 <body>
-  <h1 class="fade-in">MuscleUp</h1>
-  <p class="fade-in">Bem-vindo ao seu app de treinos!</p>
+  <h1>MuscleUp</h1>
 
-  <button onclick="alert('Treino iniciado!')" class="fade-in">Começar Treino</button>
-
-  <!-- Seções de treino -->
-  <div class="section fade-in">
-    <h2>Treino de Peito</h2>
-    <div class="exercise">Supino reto - 3x12</div>
-    <div class="exercise">Flexão de braço - 3x15</div>
-    <div class="exercise">Crossover - 3x12</div>
+  <div id="userData" class="section">
+    <h2>Meus Dados</h2>
+    <label>Idade: <input type="number" id="idade"></label>
+    <label>Altura (cm): <input type="number" id="altura"></label>
+    <label>Peso (kg): <input type="number" id="peso"></label>
+    <button onclick="saveUserData()">Salvar Dados</button>
+    <p id="imcResult"></p>
   </div>
 
-  <div class="section fade-in">
-    <h2>Treino de Pernas</h2>
-    <div class="exercise">Agachamento - 3x12</div>
-    <div class="exercise">Leg Press - 3x15</div>
-    <div class="exercise">Avanço - 3x12</div>
+  <div id="buttons" class="section">
+    <p>Escolha o tipo de treino:</p>
+    <button onclick="startWorkout('musculacao')">Musculação</button>
+    <button onclick="startWorkout('cardio')">Cardio</button>
   </div>
 
-  <div class="section fade-in">
-    <h2>Treino de Costas</h2>
-    <div class="exercise">Puxada frontal - 3x12</div>
-    <div class="exercise">Remada baixa - 3x12</div>
-    <div class="exercise">Levantamento terra - 3x10</div>
-  </div>
+  <div id="workoutArea" class="section"></div>
 
-  <footer>
-    &copy; 2025 MuscleUp. Todos os direitos reservados.
-  </footer>
+  <footer>&copy; 2025 MuscleUp</footer>
 
   <script src="script.js"></script>
 </body>
