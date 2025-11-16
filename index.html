@@ -5,25 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MuscleUp PRO</title>
 <link rel="stylesheet" href="style.css">
-<link rel="manifest" href="./manifest.json">
+<link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- Tela inicial -->
-  <div id="mainScreen">
+  <!-- Aba Cadastro -->
+  <div id="profileScreen" class="section">
     <h1>MuscleUp PRO</h1>
-    <div id="userData" class="section">
-      <h2>Meus Dados</h2>
-      <label>Idade: <input type="number" id="idade"></label>
-      <label>Altura (cm): <input type="number" id="altura"></label>
-      <label>Peso (kg): <input type="number" id="peso"></label>
-      <button onclick="saveUserData()">Salvar Dados</button>
-      <p id="welcomeMsg"></p>
-      <p id="imcResult"></p>
-      <p id="advice"></p>
-    </div>
+    <h2>Perfil do Usuário</h2>
+    <label>Nome: <input type="text" id="nome"></label>
+    <label>Idade: <input type="number" id="idade"></label>
+    <label>Altura (cm): <input type="number" id="altura"></label>
+    <label>Peso (kg): <input type="number" id="peso"></label>
+    <label>Avatar:
+      <select id="avatar">
+        <option value="avatar1">Avatar 1</option>
+        <option value="avatar2">Avatar 2</option>
+        <option value="avatar3">Avatar 3</option>
+      </select>
+    </label>
+    <button onclick="saveUserData()">Salvar Perfil</button>
+    <p id="welcomeMsg"></p>
+    <p id="imcResult"></p>
+    <p id="advice"></p>
+  </div>
 
-    <div id="groupButtons" class="section">
-      <p>Escolha o grupo muscular:</p>
+  <!-- Aba Treino -->
+  <div id="mainScreen" class="section" style="display:none;">
+    <h2>Escolha o treino</h2>
+    <div id="groupButtons">
       <button onclick="openGroup('Peito')">Peito</button>
       <button onclick="openGroup('Costas')">Costas</button>
       <button onclick="openGroup('Pernas')">Pernas</button>
@@ -31,10 +40,8 @@
       <button onclick="openGroup('Tríceps')">Tríceps</button>
       <button onclick="openGroup('Cardio')">Cardio</button>
     </div>
-
-    <div id="dailyWorkout" class="section">
-      <h2>Treino Diário</h2>
-      <p>Escolha o dia da semana:</p>
+    <div id="dailyWorkout">
+      <h3>Treino Diário</h3>
       <div class="day-buttons">
         <button onclick="showDailyWorkout('Segunda')">Segunda</button>
         <button onclick="showDailyWorkout('Terça')">Terça</button>
@@ -47,15 +54,16 @@
     </div>
   </div>
 
-  <!-- Tela de treino de grupo -->
+  <!-- Aba Treino Detalhado -->
   <div id="workoutScreen" class="section" style="display:none;">
     <button onclick="backToMain()">⬅ Voltar</button>
     <h2 id="groupTitle"></h2>
     <p id="completionPercent"></p>
     <div id="exerciseArea"></div>
+    <p id="motivationalMsg"></p>
   </div>
 
-  <!-- Tela de progresso com gráfico -->
+  <!-- Aba Estatísticas -->
   <div id="statsScreen" class="section" style="display:none;">
     <button onclick="backToMain()">⬅ Voltar</button>
     <h2>Progresso e Estatísticas</h2>
@@ -63,7 +71,7 @@
     <p id="weeklyGoal"></p>
   </div>
 
-  <footer>&copy; 2025 MuscleUp PRO</footer>
+  <footer>&copy; 2025 MuscleUp PRO | Criador: Carlinhos Veron</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>

@@ -5,6 +5,15 @@ let user = JSON.parse(localStorage.getItem('user')) || {};
 let progress = JSON.parse(localStorage.getItem('progress')) || {};
 let weeklyGoal = 20;
 
+// Mensagens motivacionais
+const motivationalMsgs = [
+  "Você está indo muito bem! 💪",
+  "Continue assim, o esforço vale a pena!",
+  "Cada repetição conta! 🏋️‍♂️",
+  "Mantenha o foco, você consegue!",
+  "Parabéns pelo progresso, continue firme!"
+];
+
 // Treinos diários
 const dailyWorkouts = {
   'Segunda': ['Peito','Bíceps','Cardio'],
@@ -56,14 +65,18 @@ const exercisesData = {
 // Inicialização
 // ======================
 window.onload = function() {
-  if(user.idade){
+  if(user.nome){
+    document.getElementById('nome').value = user.nome;
     document.getElementById('idade').value = user.idade;
     document.getElementById('altura').value = user.altura;
     document.getElementById('peso').value = user.peso;
+    document.getElementById('avatar').value = user.avatar || "avatar1";
     showIMC();
-    document.getElementById('welcomeMsg').innerText = `Bem-vindo(a) de volta! Pronto(a) para treinar? 💪`;
+    document.getElementById('welcomeMsg').innerText = `Bem-vindo(a) de volta, ${user.nome}! Pronto(a) para treinar? 💪`;
+    document.getElementById('profileScreen').style.display = 'none';
+    document.getElementById('mainScreen').style.display = 'block';
   } else {
-    document.getElementById('welcomeMsg').innerText = `Por favor, preencha seus dados para iniciar o treino.`;
+    document.getElementById('welcomeMsg').innerText = `Preencha seus dados para iniciar o treino.`;
   }
   showWeeklyGoal();
   renderChart();
@@ -73,19 +86,23 @@ window.onload = function() {
 // Funções de usuário
 // ======================
 function saveUserData(){
+  const nome = document.getElementById('nome').value;
   const idade = document.getElementById('idade').value;
   const altura = document.getElementById('altura').value;
   const peso = document.getElementById('peso').value;
+  const avatar = document.getElementById('avatar').value;
 
-  if(!idade || !altura || !peso){
+  if(!nome || !idade || !altura || !peso){
     alert('Preencha todos os campos!');
     return;
   }
 
-  user = { idade, altura, peso };
+  user = { nome, idade, altura, peso, avatar };
   localStorage.setItem('user', JSON.stringify(user));
   showIMC();
-  document.getElementById('welcomeMsg').innerText = `Dados salvos! Pronto(a) para treinar 💪`;
+  document.getElementById('welcomeMsg').innerText = `Perfil salvo! Vamos treinar, ${nome}! 💪`;
+  document.getElementById('profileScreen').style.display = 'none';
+  document.getElementById('mainScreen').style.display = 'block';
 }
 
 // Mostrar IMC e recomendações
@@ -100,26 +117,21 @@ function showIMC(){
 }
 
 // ======================
-// Treinos por grupo
+// Treinos
 // ======================
 function openGroup(group){
-  if(!user.idade){
+  if(!user.nome){
     alert('Preencha seus dados antes de iniciar o treino!');
     return;
   }
   document.getElementById('mainScreen').style.display='none';
   document.getElementById('workoutScreen').style.display='block';
   document.getElementById('groupTitle').innerText = group;
-
-  const exercises = exercisesData[group];
-  renderExercises(exercises);
+  renderExercises(exercisesData[group]);
 }
 
-// ======================
-// Treino diário
-// ======================
 function showDailyWorkout(day){
-  if(!user.idade){
+  if(!user.nome){
     alert('Preencha seus dados antes de iniciar o treino!');
     return;
   }
@@ -137,44 +149,71 @@ function showDailyWorkout(day){
   document.getElementById('mainScreen').style.display='none';
   document.getElementById('workoutScreen').style.display='block';
   document.getElementById('groupTitle').innerText = `Treino de ${day}`;
-
   renderExercises(exercises);
 }
 
 // ======================
-// Renderização de exercícios
+// Renderizar exercícios
 // ======================
 function renderExercises(exercises){
   let html = exercises.map(ex=>{
     const status = progress[ex.name] || 0;
     const doneClass = status > 0 ? 'done' : '';
-    return `<div class="exercise ${doneClass}" onclick="toggleExercise(this,'${ex.name}')">
+    return `<div class="exercise ${doneClass}">
               <span>${ex.name}</span>
               <span class="counter">${status}</span>
               <div class="assistance">${ex.assistance}</div>
+              <div class="buttons">
+                <button onclick="incrementExercise('${ex.name}',event)">+</button>
+                <button onclick="decrementExercise('${ex.name}',event)">-</button>
+              </div>
             </div>`;
   }).join('');
   document.getElementById('exerciseArea').innerHTML = html;
   updateCompletion(exercises);
+  showMotivation();
 }
 
 // ======================
-// Status e conclusão
+// Contador de exercícios
 // ======================
-function toggleExercise(el,name){
-  el.classList.toggle('done');
+function incrementExercise(name,event){
+  event.stopPropagation();
   progress[name] = (progress[name] || 0) + 1;
-  el.querySelector('.counter').innerText = progress[name];
   localStorage.setItem('progress',JSON.stringify(progress));
   renderChart();
-  const exercises = Array.from(document.querySelectorAll('.exercise'));
-  updateCompletion(exercises.map(e=>({name:e.querySelector('span').innerText})));
+  renderExercises(getAllExercisesVisible());
 }
 
+function decrementExercise(name,event){
+  event.stopPropagation();
+  progress[name] = Math.max((progress[name] || 0) - 1,0);
+  localStorage.setItem('progress',JSON.stringify(progress));
+  renderChart();
+  renderExercises(getAllExercisesVisible());
+}
+
+function getAllExercisesVisible(){
+  return Array.from(document.querySelectorAll('.exercise')).map(el=>{
+    return {
+      name: el.querySelector('span').innerText,
+      assistance: el.querySelector('.assistance').innerText
+    };
+  });
+}
+
+// ======================
+// Conclusão e motivação
+// ======================
 function updateCompletion(exercises){
   const completed = exercises.filter(e=>progress[e.name] > 0).length;
   const percent = ((completed / exercises.length)*100).toFixed(0);
   document.getElementById('completionPercent').innerText = `Conclusão do treino: ${percent}%`;
+}
+
+function showMotivation(){
+  const msg = motivationalMsgs[Math.floor(Math.random()*motivationalMsgs.length)];
+  document.getElementById('motivationalMsg').innerText = msg;
 }
 
 // ======================

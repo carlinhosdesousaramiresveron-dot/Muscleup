@@ -1,44 +1,51 @@
-body {
+/* =========================
+   Reset e estilo global
+========================= */
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #111;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #111;
     color: #fff;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    text-align: center;
+    padding: 10px;
 }
 
-h1 {
+h1, h2, h3 {
     color: #0f0;
-    font-size: 3em;
-    margin-top: 1em;
-    text-shadow: 0 0 10px #0f0;
+    text-shadow: 0 0 8px #0f0;
 }
 
 .section {
-    width: 90%;
+    width: 95%;
     max-width: 700px;
     background-color: #222;
-    margin: 1em 0;
+    margin: 15px 0;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0,255,0,0.3);
-    text-align: left;
 }
 
 label {
     display: block;
     margin: 10px 0;
+    font-size: 1.1em;
 }
 
-input {
-    padding: 5px 10px;
+input, select {
+    padding: 8px 12px;
     font-size: 1em;
     border-radius: 8px;
     border: none;
     margin-left: 10px;
+    width: calc(100% - 140px);
 }
 
 button {
@@ -59,20 +66,27 @@ button:hover {
     box-shadow: 0 0 20px #0f0;
 }
 
+.day-buttons button {
+    margin: 3px;
+    width: 100px;
+}
+
 .exercise {
-    margin: 8px 0;
+    margin: 10px 0;
     padding: 10px;
     background-color: #333;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     transition: 0.3s;
 }
 
 .exercise.done {
     background-color: #0c0;
     text-decoration: line-through;
+    color: #111;
 }
 
 .counter {
@@ -81,24 +95,63 @@ button:hover {
     padding: 2px 8px;
     border-radius: 8px;
     font-size: 0.9em;
+    margin-left: 10px;
 }
 
 .assistance {
     background-color: #444;
     padding: 10px;
     border-radius: 10px;
-    margin-left: 10px;
+    margin-top: 10px;
+    flex-basis: 100%;
     font-size: 0.9em;
-    flex: 1;
+    line-height: 1.4em;
 }
 
-.day-buttons button {
-    margin: 3px;
+.exercise .buttons {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+}
+
+.exercise .buttons button {
+    padding: 5px 10px;
+    font-size: 0.9em;
+}
+
+#motivationalMsg {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #0f0;
+    text-shadow: 0 0 6px #0f0;
+    text-align: center;
 }
 
 footer {
     margin-top: auto;
-    padding: 10px;
+    padding: 15px;
     font-size: 0.9em;
     color: #666;
+    text-align: center;
+}
+
+/* Responsividade */
+@media screen and (max-width: 480px){
+    input, select {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    .day-buttons button {
+        width: 45%;
+        margin-bottom: 5px;
+    }
+    .exercise {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .exercise .buttons {
+        margin-left: 0;
+        margin-top: 5px;
+    }
 }
