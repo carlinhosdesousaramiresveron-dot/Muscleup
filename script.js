@@ -3,7 +3,7 @@
 // ======================
 let user = JSON.parse(localStorage.getItem('user')) || {};
 let progress = JSON.parse(localStorage.getItem('progress')) || {};
-let weeklyGoal = 20; // Meta semanal de exercícios
+let weeklyGoal = 20;
 
 // Treinos diários
 const dailyWorkouts = {
@@ -167,7 +167,6 @@ function toggleExercise(el,name){
   el.querySelector('.counter').innerText = progress[name];
   localStorage.setItem('progress',JSON.stringify(progress));
   renderChart();
-  // Atualizar porcentagem
   const exercises = Array.from(document.querySelectorAll('.exercise'));
   updateCompletion(exercises.map(e=>({name:e.querySelector('span').innerText})));
 }
