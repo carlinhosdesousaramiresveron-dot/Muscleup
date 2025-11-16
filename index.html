@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuscleUp PRO</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="./manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuscleUp PRO</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="./manifest.json">
 </head>
 <body>
   <!-- Tela inicial -->
   <div id="mainScreen">
     <h1>MuscleUp PRO</h1>
-
     <div id="userData" class="section">
       <h2>Meus Dados</h2>
       <label>Idade: <input type="number" id="idade"></label>
       <label>Altura (cm): <input type="number" id="altura"></label>
       <label>Peso (kg): <input type="number" id="peso"></label>
       <button onclick="saveUserData()">Salvar Dados</button>
+      <p id="welcomeMsg"></p>
       <p id="imcResult"></p>
       <p id="advice"></p>
     </div>
@@ -35,13 +35,15 @@
     <div id="dailyWorkout" class="section">
       <h2>Treino Diário</h2>
       <p>Escolha o dia da semana:</p>
-      <button onclick="showDailyWorkout('Segunda')">Segunda</button>
-      <button onclick="showDailyWorkout('Terça')">Terça</button>
-      <button onclick="showDailyWorkout('Quarta')">Quarta</button>
-      <button onclick="showDailyWorkout('Quinta')">Quinta</button>
-      <button onclick="showDailyWorkout('Sexta')">Sexta</button>
-      <button onclick="showDailyWorkout('Sábado')">Sábado</button>
-      <button onclick="showDailyWorkout('Domingo')">Domingo</button>
+      <div class="day-buttons">
+        <button onclick="showDailyWorkout('Segunda')">Segunda</button>
+        <button onclick="showDailyWorkout('Terça')">Terça</button>
+        <button onclick="showDailyWorkout('Quarta')">Quarta</button>
+        <button onclick="showDailyWorkout('Quinta')">Quinta</button>
+        <button onclick="showDailyWorkout('Sexta')">Sexta</button>
+        <button onclick="showDailyWorkout('Sábado')">Sábado</button>
+        <button onclick="showDailyWorkout('Domingo')">Domingo</button>
+      </div>
     </div>
   </div>
 
@@ -49,6 +51,7 @@
   <div id="workoutScreen" class="section" style="display:none;">
     <button onclick="backToMain()">⬅ Voltar</button>
     <h2 id="groupTitle"></h2>
+    <p id="completionPercent"></p>
     <div id="exerciseArea"></div>
   </div>
 
