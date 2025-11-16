@@ -1,5 +1,16 @@
 let user = JSON.parse(localStorage.getItem('user')) || {};
 let progress = JSON.parse(localStorage.getItem('progress')) || {};
+let weeklyGoal = 20; // Meta semanal de exercícios
+
+const dailyWorkouts = {
+    'Segunda': ['Peito','Bíceps','Cardio'],
+    'Terça': ['Costas','Tríceps','Cardio'],
+    'Quarta': ['Pernas','Cardio'],
+    'Quinta': ['Peito','Bíceps','Cardio'],
+    'Sexta': ['Costas','Tríceps','Cardio'],
+    'Sábado': ['Treino Livre','Cardio'],
+    'Domingo': ['Descanso']
+};
 
 const exercisesData = {
     Peito: [
@@ -29,7 +40,11 @@ const exercisesData = {
         { name: 'Corrida - 30 min', assistance: 'Mantenha ritmo confortável, use tênis adequado.' },
         { name: 'Pular corda - 15 min', assistance: 'Movimente pulso, não braços, mantenha ritmo constante.' },
         { name: 'HIIT - 20 min', assistance: 'Intercale 30s de esforço intenso e 30s de descanso.' }
-    ]
+    ],
+    'Treino Livre': [
+        { name: 'Exercício à escolha - 3x12', assistance: 'Escolha qualquer exercício que deseje treinar.' }
+    ],
+    Descanso: []
 };
 
 // Inicialização
@@ -40,6 +55,8 @@ window.onload = function(){
         document.getElementById('peso').value = user.peso;
         showIMC();
     }
+    showWeeklyGoal();
+    renderChart();
 };
 
 // Salvar dados do usuário
@@ -93,13 +110,80 @@ function openGroup(group){
 // Voltar à tela inicial
 function backToMain(){
     document.getElementById('workoutScreen').style.display='none';
+    document.getElementById('statsScreen').style.display='none';
     document.getElementById('mainScreen').style.display='block';
 }
 
-// Marcar exercício feito e atualizar contador
+// Marcar exercício feito
 function toggleExercise(el,name){
     el.classList.toggle('done');
     progress[name] = (progress[name] || 0) + 1;
     el.querySelector('.counter').innerText = progress[name];
     localStorage.setItem('progress',JSON.stringify(progress));
+    renderChart();
+}
+
+// Mostrar meta semanal
+function showWeeklyGoal(){
+    document.getElementById('weeklyGoal').innerText = `Meta semanal: ${weeklyGoal} exercícios`;
+}
+
+// Renderizar gráfico de progresso
+function renderChart(){
+    const ctx = document.getElementById('progressChart')?.getContext('2d');
+    if(!ctx) return;
+    const labels = Object.keys(progress);
+    const data = Object.values(progress);
+
+    if(window.myChart) window.myChart.destroy();
+
+    window.myChart = new Chart(ctx,{
+        type:'bar',
+        data:{
+            labels: labels,
+            datasets:[{
+                label:'Repetições / Concluídos',
+                data: data,
+                backgroundColor:'#0f0'
+            }]
+        },
+        options:{
+            responsive:true,
+            plugins:{
+                legend:{display:false},
+            },
+            scales:{y:{beginAtZero:true}}
+        }
+    });
+}
+
+// Mostrar treino diário
+function showDailyWorkout(day){
+    const groups = dailyWorkouts[day];
+    let exercises = [];
+    groups.forEach(group=>{
+        if(exercisesData[group]) exercises = exercises.concat(exercisesData[group]);
+    });
+
+    if(exercises.length === 0){
+        alert('Dia de descanso!');
+        return;
+    }
+
+    document.getElementById('mainScreen').style.display='none';
+    document.getElementById('workoutScreen').style.display='block';
+    document.getElementById('groupTitle').innerText = `Treino de ${day}`;
+
+    let html = exercises.map(ex=>{
+        const done = progress[ex.name] ? 'done' : '';
+        const count = progress[ex.name] || 0;
+        return `<div class="exercise ${done}" onclick="toggleExercise(this,'${ex.name}')">
+                    <span>${ex.name}</span>
+                    <span class="counter">${count}</span>
+                    <div class="assistance">${ex.assistance}</div>
+                </div>`;
+    }).join('');
+
+    document.getElementById('exerciseArea').innerHTML = html;
+    renderChart();
 }
