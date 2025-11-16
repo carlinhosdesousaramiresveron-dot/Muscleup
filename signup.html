@@ -1,0 +1,93 @@
+<!DOCTYPE html>  <html class="dark" lang="pt-BR"><head>  
+<meta charset="utf-8"/>  
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>  
+<title>Cadastro - Personal Trainer AI</title>  
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>  
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>  
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>  
+<style>  
+        .material-symbols-outlined {  
+            font-variation-settings:  
+            'FILL' 0,  
+            'wght' 400,  
+            'GRAD' 0,  
+            'opsz' 24  
+        }  
+    </style>  
+<script id="tailwind-config">  
+      tailwind.config = {  
+        darkMode: "class",  
+        theme: {  
+          extend: {  
+            colors: {  
+              "primary": "#11d452",  
+              "background-light": "#f6f8f6",  
+              "background-dark": "#102216",  
+            },  
+            fontFamily: {  
+              "display": ["Lexend", "sans-serif"]  
+            },  
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},  
+          },  
+        },  
+      }  
+    </script>  
+</head>  
+<body class="font-display bg-background-light dark:bg-background-dark">  
+<div class="relative flex h-auto min-h-screen w-full flex-col items-center justify-center p-4 sm:p-6 lg:p-8" style='font-family: Lexend, "Noto Sans", sans-serif;'>  
+<div class="w-full max-w-5xl overflow-hidden rounded-xl shadow-2xl dark:shadow-black/50">  
+<div class="grid grid-cols-1 md:grid-cols-2">  
+<div class="relative hidden h-full min-h-[600px] flex-col justify-end bg-zinc-900 p-10 md:flex">  
+<img class="absolute inset-0 h-full w-full object-cover opacity-30" data-alt="Uma mulher em trajes esportivos levantando um peso em uma academia, com foco e determinação." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG8-KdmJGwusjZCcbi0So1FXS7fm0n5hd2mMizyS_kl-8cOKY_EPGeueo3IuVfuVPKITAEOcpF5Df6buDtX4Y_W0HzWo1f3g0onsxCCiUPjrPnvHCBi7dOLY571MiXHXZRvoUJfdzkDWbSyO4OzssxNQmBA_sY8q2or2-nYqveoSJDiYdDpNtqovG2wLosZY6UyGVtF-tmIq30K7yykgx2r0mADUnuAzrGS3ApaXT0Y_uXMHKOhHG4SqUIlOKBulqPebElr1QheuhP"/>  
+<div class="relative z-10">  
+<h2 class="mb-4 text-4xl font-black text-white leading-tight tracking-tight">Transforme seu corpo, mude sua vida.</h2>  
+<p class="text-lg text-white/80">Junte-se a milhares de usuários que estão alcançando seus objetivos de fitness com treinos personalizados.</p>  
+</div>  
+</div>  
+<div class="flex flex-col bg-[#112217] p-8 sm:p-12">  
+<div class="flex flex-col gap-5">  
+<div class="flex flex-col gap-3">  
+<div class="flex gap-6 justify-between">  
+<p class="text-white text-base font-medium leading-normal">Etapa 1 de 4: Informações Básicas</p>  
+</div>  
+<div class="rounded bg-[#326744]">  
+<div class="h-2 rounded bg-primary" style="width: 25%;"></div>  
+</div>  
+</div>  
+<div class="flex flex-wrap justify-between gap-3">  
+<div class="flex min-w-72 flex-col gap-3">  
+<p class="text-white text-4xl font-black leading-tight tracking-[-0.033em]">Crie sua Conta</p>  
+<p class="text-[#92c9a4] text-base font-normal leading-normal">Vamos começar com o básico para criar seu perfil.</p>  
+</div>  
+</div>  
+<form class="flex flex-col gap-6">  
+<div class="flex flex-col gap-4">  
+<label class="flex flex-col min-w-40 flex-1">  
+<p class="text-white text-base font-medium leading-normal pb-2">Nome completo</p>  
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border border-[#326744] bg-[#193322] focus:border-primary h-14 placeholder:text-[#92c9a4] p-[15px] text-base font-normal leading-normal" placeholder="Digite seu nome completo" value=""/>  
+</label>  
+<label class="flex flex-col min-w-40 flex-1">  
+<p class="text-white text-base font-medium leading-normal pb-2">Email</p>  
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border border-[#326744] bg-[#193322] focus:border-primary h-14 placeholder:text-[#92c9a4] p-[15px] text-base font-normal leading-normal" placeholder="seu.email@exemplo.com" type="email" value=""/>  
+</label>  
+<label class="flex flex-col min-w-40 flex-1">  
+<p class="text-white text-base font-medium leading-normal pb-2">Senha</p>  
+<div class="relative flex w-full flex-1 items-stretch">  
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border border-[#326744] bg-[#193322] focus:border-primary h-14 placeholder:text-[#92c9a4] p-[15px] text-base font-normal leading-normal" placeholder="Crie uma senha forte" type="password" value=""/>  
+<button class="absolute inset-y-0 right-0 flex items-center pr-4 text-[#92c9a4] hover:text-white" type="button">  
+<span class="material-symbols-outlined">visibility</span>  
+</button>  
+</div>  
+</label>  
+</div>  
+<div class="flex items-center gap-4 pt-4">  
+<button class="flex h-12 flex-1 items-center justify-center rounded-lg bg-primary px-6 text-base font-bold text-background-dark transition-colors hover:bg-primary/90" type="button">Avançar</button>  
+</div>  
+<div class="text-center">  
+<p class="text-sm text-[#92c9a4]">Já possui uma conta? <a class="font-semibold text-primary hover:underline" href="#">Faça login</a></p>  
+</div>  
+</form>  
+</div>  
+</div>  
+</div>  
+</body></html>
