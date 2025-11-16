@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuscleUp</title>
+  <title>MuscleUp Avançado</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="./manifest.json">
 </head>
 <body>
-  <h1>MuscleUp</h1>
+  <h1>MuscleUp Avançado</h1>
 
+  <!-- Cadastro do usuário -->
   <div id="userData" class="section">
     <h2>Meus Dados</h2>
     <label>Idade: <input type="number" id="idade"></label>
@@ -17,18 +18,34 @@
     <label>Peso (kg): <input type="number" id="peso"></label>
     <button onclick="saveUserData()">Salvar Dados</button>
     <p id="imcResult"></p>
+    <p id="advice"></p>
   </div>
 
-  <div id="buttons" class="section">
-    <p>Escolha o tipo de treino:</p>
-    <button onclick="startWorkout('musculacao')">Musculação</button>
-    <button onclick="startWorkout('cardio')">Cardio</button>
+  <!-- Seleção de treino diário -->
+  <div id="daySelection" class="section">
+    <p>Escolha o dia da semana:</p>
+    <button onclick="showDailyWorkout('Segunda')">Segunda</button>
+    <button onclick="showDailyWorkout('Terça')">Terça</button>
+    <button onclick="showDailyWorkout('Quarta')">Quarta</button>
+    <button onclick="showDailyWorkout('Quinta')">Quinta</button>
+    <button onclick="showDailyWorkout('Sexta')">Sexta</button>
+    <button onclick="showDailyWorkout('Sábado')">Sábado</button>
+    <button onclick="showDailyWorkout('Domingo')">Domingo</button>
   </div>
 
-  <div id="workoutArea" class="section"></div>
+  <!-- Área de exercícios do dia -->
+  <div id="exerciseArea" class="section"></div>
 
-  <footer>&copy; 2025 MuscleUp</footer>
+  <!-- Área de estatísticas -->
+  <div id="statsArea" class="section">
+    <h2>Estatísticas</h2>
+    <canvas id="progressChart" width="400" height="200"></canvas>
+    <p id="weeklyGoal"></p>
+  </div>
 
+  <footer>&copy; 2025 MuscleUp Avançado</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
