@@ -1,16 +1,5 @@
 let user = JSON.parse(localStorage.getItem('user')) || {};
 let progress = JSON.parse(localStorage.getItem('progress')) || {};
-let weeklyGoal = 20; // metas semanais de exercícios
-
-const dailyWorkouts = {
-    'Segunda': ['Peito','Bíceps','Cardio'],
-    'Terça': ['Costas','Tríceps','Cardio'],
-    'Quarta': ['Pernas','Cardio'],
-    'Quinta': ['Peito','Bíceps','Cardio'],
-    'Sexta': ['Costas','Tríceps','Cardio'],
-    'Sábado': ['Treino Livre','Cardio'],
-    'Domingo': ['Descanso']
-};
 
 const exercisesData = {
     Peito: [
@@ -40,13 +29,10 @@ const exercisesData = {
         { name: 'Corrida - 30 min', assistance: 'Mantenha ritmo confortável, use tênis adequado.' },
         { name: 'Pular corda - 15 min', assistance: 'Movimente pulso, não braços, mantenha ritmo constante.' },
         { name: 'HIIT - 20 min', assistance: 'Intercale 30s de esforço intenso e 30s de descanso.' }
-    ],
-    'Treino Livre': [
-        { name: 'Exercício à escolha - 3x12', assistance: 'Escolha qualquer exercício que deseje treinar.' }
-    ],
-    Descanso: []
+    ]
 };
 
+// Inicialização
 window.onload = function(){
     if(user.idade){
         document.getElementById('idade').value = user.idade;
@@ -54,10 +40,9 @@ window.onload = function(){
         document.getElementById('peso').value = user.peso;
         showIMC();
     }
-    showWeeklyGoal();
-    renderChart();
 };
 
+// Salvar dados do usuário
 function saveUserData(){
     const idade = document.getElementById('idade').value;
     const altura = document.getElementById('altura').value;
@@ -74,6 +59,7 @@ function saveUserData(){
     alert('Dados salvos!');
 }
 
+// Mostrar IMC e conselhos
 function showIMC(){
     const imc = (user.peso / ((user.altura/100)**2)).toFixed(2);
     document.getElementById('imcResult').innerText = `Seu IMC: ${imc}`;
@@ -84,76 +70,36 @@ function showIMC(){
     document.getElementById('advice').innerText = adviceText;
 }
 
-function showDailyWorkout(day){
-    const groups = dailyWorkouts[day];
-    let html = `<h2>Treino de ${day}</h2>`;
-    groups.forEach(group=>{
-        if(exercisesData[group]){
-            html += `<h3>${group}</h3>`;
-            html += exercisesData[group].map(ex=>{
-                const done = progress[ex.name] ? 'done' : '';
-                const count = progress[ex.name] || 0;
-                return `<div class="exercise ${done}" onclick="toggleExercise(this,'${ex.name}')">
-                            <span>${ex.name}</span>
-                            <span class="counter">${count}</span>
-                            <div class="assistance">${ex.assistance}</div>
-                        </div>`;
-            }).join('');
-        } else {
-            html += `<p>${group}</p>`;
-        }
-    });
+// Abrir tela do grupo
+function openGroup(group){
+    document.getElementById('mainScreen').style.display='none';
+    document.getElementById('workoutScreen').style.display='block';
+    document.getElementById('groupTitle').innerText = group;
+
+    const exercises = exercisesData[group];
+    let html = exercises.map(ex=>{
+        const done = progress[ex.name] ? 'done' : '';
+        const count = progress[ex.name] || 0;
+        return `<div class="exercise ${done}" onclick="toggleExercise(this,'${ex.name}')">
+                    <span>${ex.name}</span>
+                    <span class="counter">${count}</span>
+                    <div class="assistance">${ex.assistance}</div>
+                </div>`;
+    }).join('');
+
     document.getElementById('exerciseArea').innerHTML = html;
-
-    document.querySelectorAll('.exercise').forEach(el=>{
-        el.addEventListener('click', e=>{
-            e.stopPropagation();
-            const assist = el.querySelector('.assistance');
-            if(assist.style.display === 'block') assist.style.display = 'none';
-            else assist.style.display = 'block';
-        });
-    });
-
-    renderChart();
 }
 
+// Voltar à tela inicial
+function backToMain(){
+    document.getElementById('workoutScreen').style.display='none';
+    document.getElementById('mainScreen').style.display='block';
+}
+
+// Marcar exercício feito e atualizar contador
 function toggleExercise(el,name){
     el.classList.toggle('done');
     progress[name] = (progress[name] || 0) + 1;
     el.querySelector('.counter').innerText = progress[name];
     localStorage.setItem('progress',JSON.stringify(progress));
-    renderChart();
-}
-
-function showWeeklyGoal(){
-    document.getElementById('weeklyGoal').innerText = `Meta semanal: ${weeklyGoal} exercícios`;
-}
-
-function renderChart(){
-    const ctx = document.getElementById('progressChart').getContext('2d');
-    const labels = Object.keys(progress);
-    const data = Object.values(progress);
-
-    if(window.myChart) window.myChart.destroy();
-
-    window.myChart = new Chart(ctx,{
-        type:'bar',
-        data:{
-            labels: labels,
-            datasets:[{
-                label:'Repetições / Concluídos',
-                data: data,
-                backgroundColor:'#0f0'
-            }]
-        },
-        options:{
-            responsive:true,
-            plugins:{
-                legend:{display:false},
-            },
-            scales:{
-                y:{beginAtZero:true}
-            }
-        }
-    });
 }
