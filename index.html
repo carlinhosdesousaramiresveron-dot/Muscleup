@@ -2,116 +2,158 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>MuscleUp PRO</title>
-  <link rel="icon" href="icone-192.png" />
-  <link rel="stylesheet" href="style.css" />
+
   <link rel="manifest" href="manifest.json" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="icone-192.png" />
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script defer src="script.js"></script>
 </head>
-
 <body>
-  <!-- ===== TELA DE CADASTRO ===== -->
-  <main id="profileScreen" class="screen">
-    <div class="card">
-      <h1>MuscleUp PRO</h1>
-      <h2>Crie seu perfil</h2>
+  <div id="app">
 
-      <label>Nome
-        <input id="nome" type="text" />
-      </label>
-
-      <label>Idade
-        <input id="idade" type="number" />
-      </label>
-
-      <label>Altura (cm)
-        <input id="altura" type="number" />
-      </label>
-
-      <label>Peso (kg)
-        <input id="peso" type="number" />
-      </label>
-
-      <label>Objetivo
-        <div class="objective-buttons">
-          <button class="obj-btn" data-obj="ganho">Ganhar massa</button>
-          <button class="obj-btn" data-obj="definicao">Definir</button>
-          <button class="obj-btn" data-obj="emagrecimento">Emagrecer</button>
-        </div>
-      </label>
-
-      <label>Avatar
-        <select id="avatar">
-          <option value="avatar1.png">Avatar 1</option>
-          <option value="avatar2.png">Avatar 2</option>
-          <option value="avatar3.png">Avatar 3</option>
-        </select>
-      </label>
-
-      <div class="avatar-preview" id="avatarPreview"></div>
-
-      <button id="saveProfileBtn">Salvar e entrar</button>
-    </div>
-  </main>
-
-  <!-- ===== TELA PRINCIPAL ===== -->
-  <main id="mainScreen" class="screen hide">
-    <header class="top">
-      <div>
-        <strong id="welcomeName"></strong>
-        <small id="userObjective"></small>
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="brand">
+        <img src="icone-192.png" alt="logo" class="logo" onerror="this.style.display='none'">
+        <h1>MuscleUp</h1>
       </div>
-      <div class="controls">
-        <button id="btnOpenProfile">Perfil</button>
-        <button id="btnOpenStats">Estatísticas</button>
-      </div>
+      <button id="btnOpenProfile" class="icon-btn" aria-label="Perfil">Perfil</button>
     </header>
 
-    <section class="card">
-      <h3>Escolha um grupo muscular</h3>
-      <div id="groupButtons"></div>
-    </section>
+    <!-- SCREENS -->
+    <main id="screens">
 
-    <section class="card">
-      <h3>Treino do dia</h3>
-      <button id="dayToggleBtn">Escolher dia ▾</button>
-      <div id="dayList" class="dropdown hide">
-        <button class="day-item" data-day="Segunda">Segunda</button>
-        <button class="day-item" data-day="Terça">Terça</button>
-        <button class="day-item" data-day="Quarta">Quarta</button>
-        <button class="day-item" data-day="Quinta">Quinta</button>
-        <button class="day-item" data-day="Sexta">Sexta</button>
-        <button class="day-item" data-day="Sábado">Sábado</button>
-        <button class="day-item" data-day="Domingo">Domingo</button>
-      </div>
-    </section>
+      <!-- PROFILE SCREEN -->
+      <section id="profileScreen" class="screen">
+        <div class="card">
+          <h2>Crie seu perfil</h2>
 
-    <section id="recommended" class="card">
-      <h3>Exercícios recomendados</h3>
-      <div id="recommendedList"></div>
-    </section>
-  </main>
+          <label>Nome
+            <input id="nome" type="text" placeholder="Ex: João" />
+          </label>
 
-  <!-- ===== TELA DE TREINO ===== -->
-  <main id="workoutScreen" class="screen hide">
-    <button id="backToMain">← Voltar</button>
-    <h2 id="groupTitle"></h2>
-    <p id="completionPercent"></p>
-    <div id="exerciseArea"></div>
-  </main>
+          <div class="row">
+            <label>Idade
+              <input id="idade" type="number" min="8" placeholder="22" />
+            </label>
+            <label>Altura (cm)
+              <input id="altura" type="number" placeholder="175" />
+            </label>
+          </div>
 
-  <!-- ===== ESTATÍSTICAS ===== -->
-  <main id="statsScreen" class="screen hide">
-    <button id="backFromStats">← Voltar</button>
-    <h2>Progresso semanal</h2>
-    <canvas id="progressChart"></canvas>
-  </main>
+          <label>Peso (kg)
+            <input id="peso" type="number" placeholder="72" />
+          </label>
 
-  <footer>
-    <p>© 2025 MuscleUp PRO • Criado por Carlinhos Veron</p>
-  </footer>
+          <label>Objetivo
+            <select id="objective">
+              <option value="ganho">Ganhar massa</option>
+              <option value="definicao">Definição</option>
+              <option value="emagrecimento">Emagrecer</option>
+            </select>
+          </label>
 
-  <script src="script.js"></script>
+          <label>Avatar
+            <select id="avatar">
+              <option value="Avatar.png">Avatar.png</option>
+              <option value="avatar1.png">avatar1.png</option>
+              <option value="avatar2.png">avatar2.png</option>
+            </select>
+          </label>
+
+          <div id="avatarPreview" class="avatar-preview" aria-hidden="true"></div>
+
+          <button id="saveProfileBtn" class="primary">Salvar e entrar</button>
+        </div>
+      </section>
+
+      <!-- MAIN SCREEN -->
+      <section id="mainScreen" class="screen hide">
+        <div class="header-welcome card">
+          <div>
+            <div id="welcomeName" class="welcomeName">Olá</div>
+            <div id="userObjective" class="muted">Objetivo</div>
+          </div>
+          <img id="topAvatar" src="Avatar.png" alt="avatar" class="top-avatar" onerror="this.src='icone-192.png'">
+        </div>
+
+        <section class="card">
+          <h3>Escolha um grupo muscular</h3>
+          <div id="groupButtons" class="groups grid"></div>
+        </section>
+
+        <section class="card">
+          <div class="row between">
+            <h3>Treino do dia</h3>
+            <button id="dayToggleBtn" class="small">Escolher dia ▾</button>
+          </div>
+          <div id="dayList" class="dropdown hide">
+            <button class="day-item" data-day="Segunda">Segunda</button>
+            <button class="day-item" data-day="Terça">Terça</button>
+            <button class="day-item" data-day="Quarta">Quarta</button>
+            <button class="day-item" data-day="Quinta">Quinta</button>
+            <button class="day-item" data-day="Sexta">Sexta</button>
+            <button class="day-item" data-day="Sábado">Sábado</button>
+            <button class="day-item" data-day="Domingo">Domingo</button>
+          </div>
+          <div id="recommended" class="recommended"></div>
+        </section>
+      </section>
+
+      <!-- WORKOUT SCREEN -->
+      <section id="workoutScreen" class="screen hide">
+        <div class="card">
+          <div class="row between">
+            <button id="backToMain" class="small">← Voltar</button>
+            <h3 id="groupTitle">Grupo</h3>
+            <div></div>
+          </div>
+
+          <p id="completionPercent" class="muted">Conclusão: 0%</p>
+          <div id="exerciseArea" class="exercise-area"></div>
+        </div>
+      </section>
+
+      <!-- HELP SCREEN -->
+      <section id="helpScreen" class="screen hide">
+        <div class="card">
+          <button id="backFromHelp" class="small">← Voltar</button>
+          <h3 id="helpTitle">Ajuda</h3>
+          <div id="helpMedia" class="help-media"></div>
+          <div id="helpText" class="help-text muted"></div>
+        </div>
+      </section>
+
+      <!-- STATS SCREEN -->
+      <section id="statsScreen" class="screen hide">
+        <div class="card">
+          <button id="backFromStats" class="small">← Voltar</button>
+          <h3>Progresso semanal</h3>
+          <canvas id="progressChart" height="80"></canvas>
+          <p id="weeklyGoal" class="muted">Meta semanal: --</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM NAV (app-like) -->
+    <nav class="bottom-nav">
+      <button id="navHome" class="nav-btn active">Início</button>
+      <button id="navWorkout" class="nav-btn">Treinos</button>
+      <button id="navStats" class="nav-btn">Progresso</button>
+    </nav>
+
+  </div>
+
+  <!-- Service worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').catch(()=>{/*silent*/});
+    }
+  </script>
 </body>
-</html>
+            </html>
