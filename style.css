@@ -1,59 +1,59 @@
-/* ===== Reset & base ===== */
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html,body { height:100%; margin:0; font-family:Inter, Arial, sans-serif; background:#0b0e11; color:#fff; }
-.muted { color: #bfc7cf; font-size:13px; }
+body {
+  background: #111;
+  color: #fff;
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+}
 
-/* ===== Layout de tela ===== */
-.screen { padding:18px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; }
-.card { width:100%; max-width:960px; background:linear-gradient(180deg,#0f1316 0,#0b0e11 100%); border-radius:12px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.6); margin-bottom:14px; }
+.screen {
+  padding: 20px;
+}
 
-/* esconder telas */
-.hide { display:none !important; }
+.hide {
+  display: none;
+}
 
-/* ===== Cabeçalho / Top ===== */
-.top { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
-.controls button { margin-left:8px; }
+.card {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
 
-/* ===== Formulário perfil ===== */
-label { display:block; margin:10px 0; font-weight:600; color:#d6eef8; }
-input, select, button { width:100%; padding:10px 12px; border-radius:10px; border: none; background: rgba(255,255,255,0.02); color:#fff; }
-.objective-buttons { display:flex; gap:8px; margin-top:8px; }
-.obj-btn { flex:1; padding:10px; cursor:pointer; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:#132022; color:#dff7ef; }
-.obj-btn.active { background:linear-gradient(90deg,#00c98a,#00b3ff); color:#001; font-weight:700; transform:translateY(-2px); }
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
 
-/* avatar preview */
-.avatar-preview { width:78px; height:78px; border-radius:10px; background:linear-gradient(135deg,#1b1b1b,#0f0f0f); display:flex; align-items:center; justify-content:center; font-weight:800; margin-top:8px; }
+button {
+  background: red;
+  color: #fff;
+  font-weight: bold;
+}
 
-/* ===== Day dropdown ===== */
-.day-dropdown { position:relative; margin-top:10px; }
-#dayToggleBtn { cursor:pointer; padding:10px; border-radius:8px; background:#122; border:1px solid rgba(255,255,255,0.03); width:100%; text-align:left; }
-.dropdown { position:absolute; left:0; right:0; top:46px; background:#0e1416; border-radius:8px; padding:8px; box-shadow:0 12px 30px rgba(0,0,0,0.6); z-index:20; }
-.dropdown button { display:block; width:100%; padding:10px; margin:6px 0; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.02); color:#fff; text-align:left; }
+.group-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #222;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 
-/* ===== Groups / recommended ===== */
-.groups { display:flex; gap:8px; flex-wrap:wrap; }
-.groups button { padding:10px 12px; border-radius:10px; border:0; background:linear-gradient(90deg,#112 0,#1a2 100%); color:#fff; cursor:pointer; }
-#recommendedList { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.group-icon {
+  width: 50px;
+  height: 50px;
+}
 
-/* ===== Exercise area ===== */
-.exercise-area { display:flex; flex-direction:column; gap:10px; margin-top:10px; }
-.exercise { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px; border-radius:10px; background:linear-gradient(180deg,#0e1113,#0b0f11); }
-.exercise .info { flex:1; }
-.exercise .title { font-weight:800; }
-.exercise .assistance { color:#bfc7cf; font-size:14px; margin-top:6px; user-select:none; } /* impede seleção indesejada */
-.counter-box { display:flex; gap:8px; align-items:center; }
-.btn-small { padding:8px 10px; border-radius:8px; border:0; background:#0f7; color:#001; cursor:pointer; }
-.back { background:transparent; border:0; color:#bfc7cf; font-weight:700; cursor:pointer; }
-
-/* help screen */
-.help-media { background:#081016; height:180px; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#8fb; margin-bottom:12px; padding:8px; }
-.help-text { color:#dfeef0; line-height:1.45; }
-
-/* footer */
-.footer { position:fixed; left:0; right:0; bottom:0; height:56px; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6)); border-top:1px solid rgba(255,255,255,0.02); color:#9fb; }
-
-/* responsivo */
-@media (max-width:640px){
-  .card{ padding:14px; border-radius:10px; }
-  .groups button{ flex: 1 1 45%; }
-                  }
+.exercise-img {
+  width: 150px;
+  display: block;
+  margin-bottom: 10px;
+}
