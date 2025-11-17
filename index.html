@@ -4,33 +4,33 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MuscleUp PRO</title>
-  <link rel="icon" href="favicon.png" />
+  <link rel="icon" href="icone-192.png" />
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
-  <!-- Chart.js opcional (já carregado caso queira estatísticas) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-  <!-- ===== TELA DE CADASTRO (OBRIGATÓRIA) ===== -->
+  <!-- ===== TELA DE CADASTRO ===== -->
   <main id="profileScreen" class="screen">
     <div class="card">
       <h1>MuscleUp PRO</h1>
       <h2>Crie seu perfil</h2>
 
       <label>Nome
-        <input id="nome" type="text" placeholder="Ex: João" />
+        <input id="nome" type="text" />
       </label>
 
       <label>Idade
-        <input id="idade" type="number" min="8" placeholder="Ex: 22" />
+        <input id="idade" type="number" />
       </label>
 
       <label>Altura (cm)
-        <input id="altura" type="number" placeholder="Ex: 175" />
+        <input id="altura" type="number" />
       </label>
 
       <label>Peso (kg)
-        <input id="peso" type="number" placeholder="Ex: 72" />
+        <input id="peso" type="number" />
       </label>
 
       <label>Objetivo
@@ -43,30 +43,25 @@
 
       <label>Avatar
         <select id="avatar">
-          <option value="avatar1">Avatar 1</option>
-          <option value="avatar2">Avatar 2</option>
-          <option value="avatar3">Avatar 3</option>
+          <option value="avatar1.png">Avatar 1</option>
+          <option value="avatar2.png">Avatar 2</option>
+          <option value="avatar3.png">Avatar 3</option>
         </select>
       </label>
 
-      <div class="avatar-preview" id="avatarPreview" aria-hidden="true"></div>
+      <div class="avatar-preview" id="avatarPreview"></div>
 
-      <div class="row">
-        <button id="saveProfileBtn">Salvar perfil e entrar</button>
-      </div>
-
-      <p class="muted">O cadastro é obrigatório para gerar treinos personalizados.</p>
+      <button id="saveProfileBtn">Salvar e entrar</button>
     </div>
   </main>
 
-  <!-- ===== TELA PRINCIPAL (após cadastro) ===== -->
+  <!-- ===== TELA PRINCIPAL ===== -->
   <main id="mainScreen" class="screen hide">
     <header class="top">
       <div>
-        <strong id="welcomeName">Olá</strong>
-        <small id="userObjective" class="muted"></small>
+        <strong id="welcomeName"></strong>
+        <small id="userObjective"></small>
       </div>
-
       <div class="controls">
         <button id="btnOpenProfile">Perfil</button>
         <button id="btnOpenStats">Estatísticas</button>
@@ -75,78 +70,48 @@
 
     <section class="card">
       <h3>Escolha um grupo muscular</h3>
-      <div class="groups" id="groupButtons">
-        <!-- criado por JS -->
-      </div>
+      <div id="groupButtons"></div>
     </section>
 
     <section class="card">
       <h3>Treino do dia</h3>
-      <div class="day-dropdown">
-        <button id="dayToggleBtn">Escolher dia ▾</button>
-        <div id="dayList" class="dropdown hide">
-          <button class="day-item" data-day="Segunda">Segunda</button>
-          <button class="day-item" data-day="Terça">Terça</button>
-          <button class="day-item" data-day="Quarta">Quarta</button>
-          <button class="day-item" data-day="Quinta">Quinta</button>
-          <button class="day-item" data-day="Sexta">Sexta</button>
-          <button class="day-item" data-day="Sábado">Sábado</button>
-          <button class="day-item" data-day="Domingo">Domingo</button>
-        </div>
+      <button id="dayToggleBtn">Escolher dia ▾</button>
+      <div id="dayList" class="dropdown hide">
+        <button class="day-item" data-day="Segunda">Segunda</button>
+        <button class="day-item" data-day="Terça">Terça</button>
+        <button class="day-item" data-day="Quarta">Quarta</button>
+        <button class="day-item" data-day="Quinta">Quinta</button>
+        <button class="day-item" data-day="Sexta">Sexta</button>
+        <button class="day-item" data-day="Sábado">Sábado</button>
+        <button class="day-item" data-day="Domingo">Domingo</button>
       </div>
-      <small class="muted">Escolha o dia para gerar o treino diário baseado no seu objetivo.</small>
     </section>
 
     <section id="recommended" class="card">
       <h3>Exercícios recomendados</h3>
-      <div id="recommendedList">
-        <!-- preenchido por JS -->
-      </div>
+      <div id="recommendedList"></div>
     </section>
   </main>
 
-  <!-- ===== TELA DE TREINO (lista de exercícios) ===== -->
+  <!-- ===== TELA DE TREINO ===== -->
   <main id="workoutScreen" class="screen hide">
-    <div class="card">
-      <button class="back" id="backToMain">← Voltar</button>
-      <h2 id="groupTitle">Grupo</h2>
-      <p id="completionPercent">Conclusão: 0%</p>
-
-      <div id="exerciseArea" class="exercise-area">
-        <!-- exercícios renderizados por JS -->
-      </div>
-    </div>
+    <button id="backToMain">← Voltar</button>
+    <h2 id="groupTitle"></h2>
+    <p id="completionPercent"></p>
+    <div id="exerciseArea"></div>
   </main>
 
-  <!-- ===== TELA DE AJUDA ESPECÍFICA (PÁGINA SEPARADA) ===== -->
-  <main id="helpScreen" class="screen hide">
-    <div class="card">
-      <button class="back" id="backFromHelp">← Voltar</button>
-      <h2 id="helpTitle">Título do exercício</h2>
-      <div id="helpMedia" class="help-media">
-        <!-- imagem/GIF opcional -->
-      </div>
-      <div id="helpText" class="help-text">
-        <!-- texto de assistência -->
-      </div>
-    </div>
-  </main>
-
-  <!-- ===== TELA DE ESTATÍSTICAS ===== -->
+  <!-- ===== ESTATÍSTICAS ===== -->
   <main id="statsScreen" class="screen hide">
-    <div class="card">
-      <button class="back" id="backFromStats">← Voltar</button>
-      <h2>Progresso semanal</h2>
-      <canvas id="progressChart" height="80"></canvas>
-      <p id="weeklyGoal">Meta semanal: --</p>
-    </div>
+    <button id="backFromStats">← Voltar</button>
+    <h2>Progresso semanal</h2>
+    <canvas id="progressChart"></canvas>
   </main>
 
-  <footer class="footer">
-    <small>© 2025 MuscleUp PRO • Criador: Carlinhos Veron</small>
+  <footer>
+    <p>© 2025 MuscleUp PRO • Criado por Carlinhos Veron</p>
   </footer>
 
-  <!-- SCRIPT -->
   <script src="script.js"></script>
 </body>
-          </html>
+</html>
