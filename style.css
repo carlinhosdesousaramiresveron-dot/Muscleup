@@ -1,176 +1,131 @@
 /* =========================
-   Reset e estilo global
-========================= */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+   CONFIGURAÇÃO GERAL
+   ========================= */
 body {
-    font-family: 'Arial', sans-serif;
-    background: #111;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-h1, h2, h3 {
-    color: #0f0;
-    text-shadow: 0 0 8px #0f0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  padding-bottom: 70px; /* espaço para a navbar */
 }
 
 .section {
-    width: 95%;
-    max-width: 700px;
-    background-color: #222;
-    margin: 15px 0;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,255,0,0.3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+h1, h2, h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #00d4ff;
+}
+
+/* =========================
+   INPUTS E LABELS
+   ========================= */
 label {
-    display: block;
-    margin: 10px 0;
-    font-size: 1.1em;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
 }
 
 input, select {
-    padding: 8px 12px;
-    font-size: 1em;
-    border-radius: 8px;
-    border: none;
-    margin-left: 10px;
-    width: calc(100% - 140px);
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  font-size: 15px;
+  outline: none;
 }
 
+/* =========================
+   BOTÕES
+   ========================= */
 button {
-    margin: 5px 5px 0 0;
-    background-color: #0f0;
-    color: #111;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1.1em;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 10px #0f0;
+  background: #00bfff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
-    background-color: #0c0;
-    box-shadow: 0 0 20px #0f0;
+  background: #00a4d6;
+  transform: scale(1.05);
 }
 
+/* =========================
+   ÁREA DE TREINO
+   ========================= */
 .day-buttons button {
-    margin: 3px;
-    width: 100px;
-}
-
-.exercise {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #333;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    transition: 0.3s;
-}
-
-.exercise.done {
-    background-color: #0c0;
-    text-decoration: line-through;
-    color: #111;
-}
-
-.counter {
-    background-color: #0f0;
-    color: #111;
-    padding: 2px 8px;
-    border-radius: 8px;
-    font-size: 0.9em;
-    margin-left: 10px;
-}
-
-.assistance {
-    background-color: #444;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-    flex-basis: 100%;
-    font-size: 0.9em;
-    line-height: 1.4em;
-}
-
-.exercise .buttons {
-    display: flex;
-    gap: 5px;
-    margin-left: auto;
-}
-
-.exercise .buttons button {
-    padding: 5px 10px;
-    font-size: 0.9em;
-}
-
-#motivationalMsg {
-    margin-top: 15px;
-    font-size: 1.1em;
-    color: #0f0;
-    text-shadow: 0 0 6px #0f0;
-    text-align: center;
-}
-
-footer {
-    margin-top: auto;
-    padding: 15px;
-    font-size: 0.9em;
-    color: #666;
-    text-align: center;
-}
-
-/* Responsividade */
-@media screen and (max-width: 480px){
-    input, select {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 5px;
-    }
-    .day-buttons button {
-        width: 45%;
-        margin-bottom: 5px;
-    }
-    .exercise {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .exercise .buttons {
-        margin-left: 0;
-        margin-top: 5px;
-    }
-}
-.navbar {
   width: 100%;
-  background-color: #000;
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  border-bottom: 2px solid #00ff00;
+  margin-top: 10px;
 }
-.nav-logo {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
+
+#exerciseArea {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#exerciseArea div {
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #000000aa;
+  backdrop-filter: blur(7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #00d4ff;
 }
 
 .navbar h1 {
-  color: #00ff00;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 18px;
+  color: #00d4ff;
+}
+
+.nav-logo {
+  width: 35px;
+  height: 35px;
+}
+
+/* =========================
+   TEXTO DE AJUDA SEM BUG
+   ========================= */
+p, label, button, h1, h2, h3 {
+  user-select: none; /* impede highlights e bugs de seleção */
+}
+
+/* Corrige highlight azul no celular */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================
+   RODAPÉ
+   ========================= */
+footer {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 20px;
 }
