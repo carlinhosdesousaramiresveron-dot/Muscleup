@@ -1,59 +1,95 @@
-body {
-  background: #111;
-  color: #fff;
-  font-family: Arial;
-  margin: 0;
-  padding: 0;
+:root{
+  --bg:#080808;
+  --card:#0f1410;
+  --muted:#9aa6a0;
+  --accent:#00c853; /* verde */
+  --accent-2:#00b44a;
+  --white:#ffffff;
+  --radius:14px;
+  --gap:14px;
+  --shadow: 0 8px 24px rgba(0,0,0,0.6);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-.screen {
-  padding: 20px;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#040504 0%, #07110a 100%);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-.hide {
-  display: none;
+/* layout */
+#app{display:flex;flex-direction:column;min-height:100vh}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
+  position:sticky;top:0;background:transparent;z-index:6;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:18px;margin:0;color:var(--white)}
+.logo{width:40px;height:40px;border-radius:10px;object-fit:cover}
+
+/* screens */
+.screen{padding:18px}
+.card{
+  background: linear-gradient(180deg, rgba(16,23,17,0.6), rgba(8,12,8,0.4));
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:var(--gap);
 }
 
-.card {
-  background: #1c1c1c;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+/* profile */
+.row{display:flex;gap:12px}
+.row.between{justify-content:space-between;align-items:center}
+label{display:block;font-size:13px;color:var(--muted);margin-top:10px}
+input,select,button{font-size:15px}
+input,select{
+  width:100%;padding:10px;border-radius:10px;border:none;background:#0b120a;color:var(--white);
+  margin-top:6px;
+}
+.primary{
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#021202;
+  padding:12px;border-radius:12px;font-weight:700;margin-top:16px;cursor:pointer;
+  box-shadow: 0 6px 18px rgba(0,200,83,0.12);
 }
 
-input, select, button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-}
+/* avatar */
+.avatar-preview{margin-top:10px;display:flex;align-items:center;gap:10px}
+.avatar-preview img, .top-avatar{width:72px;height:72px;border-radius:18px;object-fit:cover;border:3px solid rgba(0,200,83,0.12)}
 
-button {
-  background: red;
-  color: #fff;
-  font-weight: bold;
+/* groups grid */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.group-btn{
+  display:flex;flex-direction:column;align-items:center;background:linear-gradient(180deg,#071009,#0b130b);
+  border-radius:12px;padding:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.02);
+  transition:transform .12s ease, box-shadow .12s ease;
 }
+.group-btn:active{transform:translateY(2px)}
+.group-btn img{width:78px;height:78px;object-fit:cover;border-radius:12px}
+.group-btn span{margin-top:8px;font-weight:600;color:var(--white)}
 
-.group-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #222;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+/* recommended & exercise */
+.recommended{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.exercise-area{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+.exercise{
+  display:flex;gap:12px;align-items:center;background:linear-gradient(180deg,#071009,#06110a);
+  padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);
 }
+.exercise-img{width:120px;height:80px;object-fit:cover;border-radius:10px}
+.exercise .info{flex:1}
+.title{font-weight:700}
+.assistance{color:var(--muted);font-size:13px;margin-top:4px}
 
-.group-icon {
-  width: 50px;
-  height: 50px;
+/* small buttons & nav */
+.small{background:transparent;color:var(--accent);border:1px solid rgba(0,200,83,0.12);padding:8px 10px;border-radius:8px;cursor:pointer}
+.icon-btn{background:transparent;border:none;color:var(--muted);cursor:pointer}
+.bottom-nav{
+  display:flex;gap:8px;padding:10px;background:linear-gradient(180deg, rgba(0,0,0,0.40), rgba(0,0,0,0.6));
+  justify-content:space-around;position:sticky;bottom:0;border-top:1px solid rgba(255,255,255,0.02);
 }
+.nav-btn{background:transparent;border:none;color:var(--muted);padding:10px;border-radius:10px;cursor:pointer}
+.nav-btn.active{color:var(--accent);font-weight:700}
 
-.exercise-img {
-  width: 150px;
-  display: block;
-  margin-bottom: 10px;
-}
+/* misc */
+.hide{display:none}
+.muted{color:var(--muted);font-size:13px}
