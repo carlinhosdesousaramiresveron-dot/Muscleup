@@ -1,159 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>MuscleUp PRO</title>
+<!-- HELP SCREEN COMPLETO -->
+<section id="helpScreen" class="screen hide fade-in">
 
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icone-192.png" />
+  <div class="card">
 
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script defer src="script.js"></script>
-</head>
-<body>
-  <div id="app">
+    <!-- Botão Voltar -->
+    <button id="backFromHelp" class="small">← Voltar</button>
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-      <div class="brand">
-        <img src="icone-192.png" alt="logo" class="logo" onerror="this.style.display='none'">
-        <h1>MuscleUp</h1>
+    <!-- Título do Exercício -->
+    <h3 id="helpTitle">Ajuda do Exercício</h3>
+
+    <!-- MÍDIA (Imagem ou Vídeo) -->
+    <div id="helpMedia" class="help-media">
+      <!-- Você pode trocar por imagem dinâmica no JS -->
+      <img id="helpImage" src="exemplo.jpg" alt="Execução do exercício">
+      <!-- ou usar vídeo:
+      <video id="helpVideo" src="exemplo.mp4" controls></video>
+      -->
+    </div>
+
+    <!-- TEXTO DE AJUDA PROFISSIONAL -->
+    <div id="helpText" class="help-text">
+
+      <!-- Seção 1 -->
+      <div class="help-section">
+        <strong>Como executar:</strong><br>
+        Mantenha postura neutra, ombros para trás e movimento sempre controlado.
+        Evite usar impulso. Concentre a força no músculo que está sendo treinado.
       </div>
-      <button id="btnOpenProfile" class="icon-btn" aria-label="Perfil">Perfil</button>
-    </header>
 
-    <!-- SCREENS -->
-    <main id="screens">
+      <!-- Seção 2 -->
+      <div class="help-section">
+        <strong>Respiração:</strong>
+        <ul>
+          <li>Inspire enquanto desce</li>
+          <li>Expire enquanto sobe</li>
+        </ul>
+      </div>
 
-      <!-- PROFILE SCREEN -->
-      <section id="profileScreen" class="screen">
-        <div class="card">
-          <h2>Crie seu perfil</h2>
+      <!-- Seção 3 -->
+      <div class="help-section">
+        <strong>Erros comuns:</strong>
+        <ul>
+          <li>Usar carga excessiva</li>
+          <li>Fazer o movimento rápido demais</li>
+          <li>Arquear a lombar</li>
+          <li>Travar a respiração</li>
+        </ul>
+      </div>
 
-          <label>Nome
-            <input id="nome" type="text" placeholder="Ex: João" />
-          </label>
+      <!-- Seção 4 -->
+      <div class="help-section">
+        <strong>Dica de evolução:</strong><br>
+        Progrida 5–10% de carga somente quando conseguir realizar todas as repetições
+        com boa técnica e sem perder o controle do movimento.
+      </div>
 
-          <div class="row">
-            <label>Idade
-              <input id="idade" type="number" min="8" placeholder="22" />
-            </label>
-            <label>Altura (cm)
-              <input id="altura" type="number" placeholder="175" />
-            </label>
-          </div>
-
-          <label>Peso (kg)
-            <input id="peso" type="number" placeholder="72" />
-          </label>
-
-          <label>Objetivo
-            <select id="objective">
-              <option value="ganho">Ganhar massa</option>
-              <option value="definicao">Definição</option>
-              <option value="emagrecimento">Emagrecer</option>
-            </select>
-          </label>
-
-          <label>Avatar
-            <select id="avatar">
-              <option value="Avatar.png">Avatar.png</option>
-              <option value="avatar1.png">avatar1.png</option>
-              <option value="avatar2.png">avatar2.png</option>
-            </select>
-          </label>
-
-          <div id="avatarPreview" class="avatar-preview" aria-hidden="true"></div>
-
-          <button id="saveProfileBtn" class="primary">Salvar e entrar</button>
-        </div>
-      </section>
-
-      <!-- MAIN SCREEN -->
-      <section id="mainScreen" class="screen hide">
-        <div class="header-welcome card">
-          <div>
-            <div id="welcomeName" class="welcomeName">Olá</div>
-            <div id="userObjective" class="muted">Objetivo</div>
-          </div>
-          <img id="topAvatar" src="Avatar.png" alt="avatar" class="top-avatar" onerror="this.src='icone-192.png'">
-        </div>
-
-        <section class="card">
-          <h3>Escolha um grupo muscular</h3>
-          <div id="groupButtons" class="groups grid"></div>
-        </section>
-
-        <section class="card">
-          <div class="row between">
-            <h3>Treino do dia</h3>
-            <button id="dayToggleBtn" class="small">Escolher dia ▾</button>
-          </div>
-          <div id="dayList" class="dropdown hide">
-            <button class="day-item" data-day="Segunda">Segunda</button>
-            <button class="day-item" data-day="Terça">Terça</button>
-            <button class="day-item" data-day="Quarta">Quarta</button>
-            <button class="day-item" data-day="Quinta">Quinta</button>
-            <button class="day-item" data-day="Sexta">Sexta</button>
-            <button class="day-item" data-day="Sábado">Sábado</button>
-            <button class="day-item" data-day="Domingo">Domingo</button>
-          </div>
-          <div id="recommended" class="recommended"></div>
-        </section>
-      </section>
-
-      <!-- WORKOUT SCREEN -->
-      <section id="workoutScreen" class="screen hide">
-        <div class="card">
-          <div class="row between">
-            <button id="backToMain" class="small">← Voltar</button>
-            <h3 id="groupTitle">Grupo</h3>
-            <div></div>
-          </div>
-
-          <p id="completionPercent" class="muted">Conclusão: 0%</p>
-          <div id="exerciseArea" class="exercise-area"></div>
-        </div>
-      </section>
-
-      <!-- HELP SCREEN -->
-      <section id="helpScreen" class="screen hide">
-        <div class="card">
-          <button id="backFromHelp" class="small">← Voltar</button>
-          <h3 id="helpTitle">Ajuda</h3>
-          <div id="helpMedia" class="help-media"></div>
-          <div id="helpText" class="help-text muted"></div>
-        </div>
-      </section>
-
-      <!-- STATS SCREEN -->
-      <section id="statsScreen" class="screen hide">
-        <div class="card">
-          <button id="backFromStats" class="small">← Voltar</button>
-          <h3>Progresso semanal</h3>
-          <canvas id="progressChart" height="80"></canvas>
-          <p id="weeklyGoal" class="muted">Meta semanal: --</p>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- BOTTOM NAV (app-like) -->
-    <nav class="bottom-nav">
-      <button id="navHome" class="nav-btn active">Início</button>
-      <button id="navWorkout" class="nav-btn">Treinos</button>
-      <button id="navStats" class="nav-btn">Progresso</button>
-    </nav>
+    </div>
 
   </div>
 
-  <!-- Service worker registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js').catch(()=>{/*silent*/});
-    }
-  </script>
-</body>
-            </html>
+</section>
